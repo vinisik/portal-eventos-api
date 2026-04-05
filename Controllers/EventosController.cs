@@ -20,7 +20,9 @@ namespace PortalEventos.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Evento>>> GetEventos()
         {
-            return await _context.Eventos.ToListAsync();
+            return await _context.Eventos
+                                 .Include(e => e.Participantes)
+                                 .ToListAsync();
         }
 
         // Cadastro de evento pelo admin
